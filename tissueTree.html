@@ -1,0 +1,996 @@
+<!DOCTYPE >
+
+<HTML lang="en" >
+  <HEAD>
+    <TITLE> Tissue Tree </TITLE>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" href="css/demo.css" type="text/css">
+    <link rel="stylesheet" href="css/zTreeStyle/zTreeStyle.css" type="text/css">
+    <!-- <script type="text/javascript" src="/ztree_v3/api/apiCss/jquery-1.6.2.min.js"></script> -->
+    <script type="text/javascript" src="api/apiCss/jquery-1.6.2.min.js" ></script>
+    <script type="text/javascript" src="api/apiCss/jquery.ztree.core.js"></script>
+    <SCRIPT LANGUAGE="JavaScript">
+
+    
+    var zTreeObj;
+
+    var setting = {
+    	callback: {
+    		onAsyncSuccess: function(event, treeId, treeNode, msg) {
+    			if(treeNode && treeNode.children){
+    				for(var i = 0;i < treeNode.children.length;i++) {
+    					ZTreeObj.expandNode(treeNode.children[i], true, true, true);
+    				}
+    			}
+    		}
+      },
+      data: {
+        simpleData: {  //简单数据模式
+          enable: true
+          // idKey: "id",  
+          // pIdKey: "pId",  
+          // rootPId: 0
+        }
+      },
+      view: {
+        selectedMulti: false,
+        showLine:true,
+        showIcon:true,
+        dblClickExpand: false,
+        fontCss: function(treeId, node) {  
+            return node.font ? node.font : {};  
+          } ,  
+        }, 
+      // isParent = true
+    };
+    // <span style="color: #ff0000;"></span>    
+    var zNodes = 
+    [
+    {
+        "id": 0,
+        "name": "Fat pad",
+        "pId": 74,
+        "open": "true"
+    },
+    {
+        "id": 1,
+        "name": "Nucleus pulposus",
+        "isParent": "true",
+        "open": "true"
+    },
+    {
+        "id": 2,
+        "name": "Brown adipose tissue",
+        "pId": 74,
+        "open": "true"
+    },
+    {
+        "id": 3,
+        "name": "Muscle",
+        "isParent": "true",
+        "open": "true"
+    },
+    {
+        "id": 4,
+        "name": "Salivary gland",
+        "isParent": "true",
+        "open": "true"
+    },
+    {
+        "id": 5,
+        "name": "Periosteum",
+        "isParent": "true",
+        "open": "true"
+    },
+    {
+        "id": 6,
+        "name": "Pyloric gland",
+        "pId": 50,
+        "open": "true"
+    },
+    {
+        "id": 7,
+        "name": "Bone",
+        "isParent": "true",
+        "open": "true"
+    },
+    {
+        "id": 8,
+        "name": "Ovarian follicle",
+        "pId": 28,
+        "open": "true"
+    },
+    {
+        "id": 9,
+        "name": "Gingiva",
+        "pId": 16,
+        "open": "true"
+    },
+    {
+        "id": 10,
+        "name": "Hippocampus",
+        "pId": 25,
+        "open": "true"
+    },
+    {
+        "id": 11,
+        "name": "Nasal concha",
+        "pId": 134,
+        "open": "true"
+    },
+    {
+        "id": 12,
+        "name": "Corneal endothelium",
+        "pId": 100,
+        "open": "true"
+    },
+    {
+        "id": 13,
+        "name": "Immune system",
+        "isParent": "true",
+        "open": "true"
+    },
+    {
+        "id": 14,
+        "name": "Hair follicle",
+        "isParent": "true",
+        "open": "true"
+    },
+    {
+        "id": 15,
+        "name": "Ovarian cortex",
+        "pId": 28,
+        "open": "true"
+    },
+    {
+        "id": 16,
+        "name": "Oral cavity",
+        "isParent": "true",
+        "open": "true"
+    },
+    {
+        "id": 17,
+        "name": "Fetal gonad",
+        "isParent": "true",
+        "open": "true"
+    },
+    {
+        "id": 18,
+        "name": "Blood vessel",
+        "isParent": "true",
+        "open": "true"
+    },
+    {
+        "id": 19,
+        "name": "Limbal epithelium",
+        "pId": 42,
+        "open": "true"
+    },
+    {
+        "id": 20,
+        "name": "Intestine",
+        "isParent": "true",
+        "open": "true"
+    },
+    {
+        "id": 21,
+        "name": "Amniotic membrane",
+        "isParent": "true",
+        "open": "true"
+    },
+    {
+        "id": 22,
+        "name": "Subcutaneous adipose tissue",
+        "pId": 74,
+        "open": "true"
+    },
+    {
+        "id": 23,
+        "name": "Reproductive",
+        "isParent": "true",
+        "open": "true"
+    },
+    {
+        "id": 24,
+        "name": "Pluripotent stem cell",
+        "isParent": "true",
+        "open": "true"
+    },
+    {
+        "id": 25,
+        "name": "Brain",
+        "isParent": "true",
+        "open": "true"
+    },
+    {
+        "id": 26,
+        "name": "Vocal fold",
+        "isParent": "true",
+        "open": "true"
+    },
+    {
+        "id": 27,
+        "name": "Gut",
+        "isParent": "true",
+        "open": "true"
+    },
+    {
+        "id": 28,
+        "name": "Ovary",
+        "isParent": "true",
+        "open": "true"
+    },
+    {
+        "id": 29,
+        "name": "Lung",
+        "isParent": "true",
+        "open": "true"
+    },
+    {
+        "id": 30,
+        "name": "Pancreatic acinar tissue",
+        "pId": 135,
+        "open": "true"
+    },
+    {
+        "id": 31,
+        "name": "Tooth",
+        "pId": 16,
+        "open": "true"
+    },
+    {
+        "id": 32,
+        "name": "Liver",
+        "isParent": "true",
+        "open": "true"
+    },
+    {
+        "id": 33,
+        "name": "Retinal pigment epithelium",
+        "pId": 42,
+        "open": "true"
+    },
+    {
+        "id": 34,
+        "name": "Gastric epithelium",
+        "pId": 103,
+        "open": "true"
+    },
+    {
+        "id": 35,
+        "name": "Oviduct",
+        "isParent": "true",
+        "open": "true"
+    },
+    {
+        "id": 36,
+        "name": "Periodontal ligament",
+        "pId": 16,
+        "open": "true"
+    },
+    {
+        "id": 37,
+        "name": "Small intestine",
+        "pId": 20,
+        "open": "true"
+    },
+    {
+        "id": 38,
+        "name": "Vagina",
+        "isParent": "true",
+        "open": "true"
+    },
+    {
+        "id": 39,
+        "name": "Intestinal crypt",
+        "isParent": "true",
+        "open": "true"
+    },
+    {
+        "id": 40,
+        "name": "Airway epithelium",
+        "isParent": "true",
+        "open": "true"
+    },
+    {
+        "id": 41,
+        "name": "Testis",
+        "isParent": "true",
+        "open": "true"
+    },
+    {
+        "id": 42,
+        "name": "Eye",
+        "isParent": "true",
+        "open": "true"
+    },
+    {
+        "id": 43,
+        "name": "Fetal pancreas",
+        "isParent": "true",
+        "open": "true"
+    },
+    {
+        "id": 44,
+        "name": "Gastric gland",
+        "pId": 103,
+        "open": "true"
+    },
+    {
+        "id": 45,
+        "name": "Adventitia",
+        "isParent": "true",
+        "open": "true"
+    },
+    {
+        "id": 46,
+        "name": "Seminal plasma",
+        "isParent": "true",
+        "open": "true"
+    },
+    {
+        "id": 47,
+        "name": "Sputum",
+        "isParent": "true",
+        "open": "true"
+    },
+    {
+        "id": 48,
+        "name": "Jejunum",
+        "pId": 20,
+        "open": "true"
+    },
+    {
+        "id": 49,
+        "name": "Venous blood",
+        "pId": 63,
+        "open": "true"
+    },
+    {
+        "id": 50,
+        "name": "Stomach",
+        "isParent": "true",
+        "open": "true"
+    },
+    {
+        "id": 51,
+        "name": "Fetal liver",
+        "isParent": "true",
+        "open": "true"
+    },
+    {
+        "id": 52,
+        "name": "Plasma",
+        "pId": 63,
+        "open": "true"
+    },
+    {
+        "id": 53,
+        "name": "Urine",
+        "isParent": "true",
+        "open": "true"
+    },
+    {
+        "id": 54,
+        "name": "Heart",
+        "isParent": "true",
+        "open": "true"
+    },
+    {
+        "id": 55,
+        "name": "Esophagus",
+        "isParent": "true",
+        "open": "true"
+    },
+    {
+        "id": 56,
+        "name": "Germ",
+        "isParent": "true",
+        "open": "true"
+    },
+    {
+        "id": 57,
+        "name": "Anterior cruciate ligament",
+        "isParent": "true",
+        "open": "true"
+    },
+    {
+        "id": 58,
+        "name": "Bladder",
+        "isParent": "true",
+        "open": "true"
+    },
+    {
+        "id": 59,
+        "name": "Submandibular gland",
+        "isParent": "true",
+        "open": "true"
+    },
+    {
+        "id": 60,
+        "name": "Inferior colliculus",
+        "pId": 25,
+        "open": "true"
+    },
+    {
+        "id": 61,
+        "name": "Small intestinal crypt",
+        "pId": 20,
+        "open": "true"
+    },
+    {
+        "id": 62,
+        "name": "Vasculature",
+        "isParent": "true",
+        "open": "true"
+    },
+    {
+        "id": 63,
+        "name": "Blood",
+        "isParent": "true",
+        "open": "true"
+    },
+    {
+        "id": 64,
+        "name": "Whartons jelly",
+        "pId": 144,
+        "open": "true"
+    },
+    {
+        "id": 65,
+        "name": "Renal glomerulus",
+        "pId": 117,
+        "open": "true"
+    },
+    {
+        "id": 66,
+        "name": "Corpus luteum",
+        "pId": 28,
+        "open": "true"
+    },
+    {
+        "id": 67,
+        "name": "Thyroid",
+        "isParent": "true",
+        "open": "true"
+    },
+    {
+        "id": 68,
+        "name": "Gonad",
+        "isParent": "true",
+        "open": "true"
+    },
+    {
+        "id": 69,
+        "name": "Scalp",
+        "isParent": "true",
+        "open": "true"
+    },
+    {
+        "id": 70,
+        "name": "Thymus",
+        "isParent": "true",
+        "open": "true"
+    },
+    {
+        "id": 71,
+        "name": "Colorectum",
+        "pId": 78,
+        "open": "true"
+    },
+    {
+        "id": 72,
+        "name": "Optic nerve",
+        "isParent": "true",
+        "open": "true"
+    },
+    {
+        "id": 73,
+        "name": "Zygote",
+        "isParent": "true",
+        "open": "true"
+    },
+    {
+        "id": 74,
+        "name": "Adipose tissue",
+        "isParent": "true",
+        "open": "true"
+    },
+    {
+        "id": 75,
+        "name": "Osteoarthritic cartilage",
+        "isParent": "true",
+        "open": "true"
+    },
+    {
+        "id": 76,
+        "name": "Premolar",
+        "pId": 16,
+        "open": "true"
+    },
+    {
+        "id": 77,
+        "name": "Endometrium stroma",
+        "pId": 102,
+        "open": "true"
+    },
+    {
+        "id": 78,
+        "name": "Large intestine",
+        "isParent": "true",
+        "open": "true"
+    },
+    {
+        "id": 79,
+        "name": "Prostate",
+        "isParent": "true",
+        "open": "true"
+    },
+    {
+        "id": 80,
+        "name": "Mammary epithelium",
+        "pId": 93,
+        "open": "true"
+    },
+    {
+        "id": 81,
+        "name": "Oral mucosa",
+        "pId": 16,
+        "open": "true"
+    },
+    {
+        "id": 82,
+        "name": "Dermis",
+        "pId": 148,
+        "open": "true"
+    },
+    {
+        "id": 83,
+        "name": "Peripheral blood",
+        "pId": 63,
+        "open": "true"
+    },
+    {
+        "id": 84,
+        "name": "Mammary gland",
+        "pId": 93,
+        "open": "true"
+    },
+    {
+        "id": 85,
+        "name": "Adrenal gland",
+        "isParent": "true",
+        "open": "true"
+    },
+    {
+        "id": 86,
+        "name": "Lymph",
+        "isParent": "true",
+        "open": "true"
+    },
+    {
+        "id": 87,
+        "name": "Splenic red pulp",
+        "isParent": "true",
+        "open": "true"
+    },
+    {
+        "id": 88,
+        "name": "Nasal epithelium",
+        "pId": 134,
+        "open": "true"
+    },
+    {
+        "id": 89,
+        "name": "Serum",
+        "pId": 63,
+        "open": "true"
+    },
+    {
+        "id": 90,
+        "name": "Primitive streak",
+        "isParent": "true",
+        "open": "true"
+    },
+    {
+        "id": 91,
+        "name": "Fetal kidney",
+        "isParent": "true",
+        "open": "true"
+    },
+    {
+        "id": 92,
+        "name": "Duodenum",
+        "pId": 20,
+        "open": "true"
+    },
+    {
+        "id": 93,
+        "name": "Breast",
+        "isParent": "true",
+        "open": "true"
+    },
+    {
+        "id": 94,
+        "name": "Lacrimal gland",
+        "isParent": "true",
+        "open": "true"
+    },
+    {
+        "id": 95,
+        "name": "Visceral adipose tissue",
+        "pId": 74,
+        "open": "true"
+    },
+    {
+        "id": 96,
+        "name": "Spinal cord",
+        "isParent": "true",
+        "open": "true"
+    },
+    {
+        "id": 97,
+        "name": "Lymph node",
+        "pId": 86,
+        "open": "true"
+    },
+    {
+        "id": 98,
+        "name": "Laryngeal squamous epithelium",
+        "isParent": "true",
+        "open": "true"
+    },
+    {
+        "id": 99,
+        "name": "Skeletal muscle",
+        "isParent": "true",
+        "open": "true"
+    },
+    {
+        "id": 100,
+        "name": "Cornea",
+        "isParent": "true",
+        "open": "true"
+    },
+    {
+        "id": 101,
+        "name": "Synovium",
+        "isParent": "true",
+        "open": "true"
+    },
+    {
+        "id": 102,
+        "name": "Uterus",
+        "isParent": "true",
+        "open": "true"
+    },
+    {
+        "id": 103,
+        "name": "Gastric",
+        "isParent": "true",
+        "open": "true"
+    },
+    {
+        "id": 104,
+        "name": "Ligament",
+        "isParent": "true",
+        "open": "true"
+    },
+    {
+        "id": 105,
+        "name": "Sclerocorneal tissue",
+        "pId": 42,
+        "open": "true"
+    },
+    {
+        "id": 106,
+        "name": "Sympathetic ganglion",
+        "isParent": "true",
+        "open": "true"
+    },
+    {
+        "id": 107,
+        "name": "Foreskin",
+        "pId": 148,
+        "open": "true"
+    },
+    {
+        "id": 108,
+        "name": "Synovial fluid",
+        "isParent": "true",
+        "open": "true"
+    },
+    {
+        "id": 109,
+        "name": "Umbilical vein",
+        "isParent": "true",
+        "open": "true"
+    },
+    {
+        "id": 110,
+        "name": "Chorionic villus",
+        "isParent": "true",
+        "open": "true"
+    },
+    {
+        "id": 111,
+        "name": "Lymphoid tissue",
+        "pId": 86,
+        "open": "true"
+    },
+    {
+        "id": 112,
+        "name": "Cartilage",
+        "isParent": "true",
+        "open": "true"
+    },
+    {
+        "id": 113,
+        "name": "White adipose tissue",
+        "pId": 74,
+        "open": "true"
+    },
+    {
+        "id": 114,
+        "name": "Tonsil",
+        "isParent": "true",
+        "open": "true"
+    },
+    {
+        "id": 115,
+        "name": "Abdominal adipose tissue",
+        "pId": 74,
+        "open": "true"
+    },
+    {
+        "id": 116,
+        "name": "Lungs",
+        "pId": 29,
+        "open": "true"
+    },
+    {
+        "id": 117,
+        "name": "Kidney",
+        "pId": 117,
+        "open": "true"
+    },
+    {
+        "id": 118,
+        "name": "Endometrium",
+        "pId": 102,
+        "open": "true"
+    },
+    {
+        "id": 119,
+        "name": "Artery",
+        "isParent": "true",
+        "open": "true"
+    },
+    {
+        "id": 120,
+        "name": "Myometrium",
+        "isParent": "true",
+        "open": "true"
+    },
+    {
+        "id": 121,
+        "name": "Molar",
+        "pId": 16,
+        "open": "true"
+    },
+    {
+        "id": 122,
+        "name": "Myocardium",
+        "isParent": "true",
+        "open": "true"
+    },
+    {
+        "id": 123,
+        "name": "GI tract",
+        "isParent": "true",
+        "open": "true"
+    },
+    {
+        "id": 124,
+        "name": "Bone marrow",
+        "isParent": "true",
+        "open": "true"
+    },
+    {
+        "id": 125,
+        "name": "Urinary bladder",
+        "isParent": "true",
+        "open": "true"
+    },
+    {
+        "id": 126,
+        "name": "Adrenal glands",
+        "pId": 85,
+        "open": "true"
+    },
+    {
+        "id": 127,
+        "name": "Ascites",
+        "isParent": "true",
+        "open": "true"
+    },
+    {
+        "id": 128,
+        "name": "Umbilical cord blood",
+        "isParent": "true",
+        "open": "true"
+    },
+    {
+        "id": 129,
+        "name": "Gastric corpus",
+        "pId": 103,
+        "open": "true"
+    },
+    {
+        "id": 130,
+        "name": "Intervertebral disc",
+        "isParent": "true",
+        "open": "true"
+    },
+    {
+        "id": 131,
+        "name": "Gastrointestinal tract",
+        "pId": 103,
+        "open": "true"
+    },
+    {
+        "id": 132,
+        "name": "Smooth muscle",
+        "isParent": "true",
+        "open": "true"
+    },
+    {
+        "id": 133,
+        "name": "Umbilical cord",
+        "isParent": "true",
+        "open": "true"
+    },
+    {
+        "id": 134,
+        "name": "Nose",
+        "isParent": "true",
+        "open": "true"
+    },
+    {
+        "id": 135,
+        "name": "Pancreas",
+        "isParent": "true",
+        "open": "true"
+    },
+    {
+        "id": 136,
+        "name": "Amniotic fluid",
+        "isParent": "true",
+        "open": "true"
+    },
+    {
+        "id": 137,
+        "name": "Corneal epithelium",
+        "pId": 100,
+        "open": "true"
+    },
+    {
+        "id": 138,
+        "name": "Placenta",
+        "isParent": "true",
+        "open": "true"
+    },
+    {
+        "id": 139,
+        "name": "Sinonasal mucosa",
+        "isParent": "true",
+        "open": "true"
+    },
+    {
+        "id": 140,
+        "name": "Dental pulp",
+        "pId": 16,
+        "open": "true"
+    },
+    {
+        "id": 141,
+        "name": "Epithelium",
+        "isParent": "true",
+        "open": "true"
+    },
+    {
+        "id": 142,
+        "name": "Deciduous tooth",
+        "pId": 16,
+        "open": "true"
+    },
+    {
+        "id": 143,
+        "name": "Olfactory system",
+        "isParent": "true",
+        "open": "true"
+    },
+    {
+        "id": 144,
+        "name": "Cord",
+        "isParent": "true",
+        "open": "true"
+    },
+    {
+        "id": 145,
+        "name": "Antecubital vein",
+        "isParent": "true",
+        "open": "true"
+    },
+    {
+        "id": 146,
+        "name": "Decidua",
+        "isParent": "true",
+        "open": "true"
+    },
+    {
+        "id": 147,
+        "name": "Fetal brain",
+        "isParent": "true",
+        "open": "true"
+    },
+    {
+        "id": 148,
+        "name": "Skin",
+        "isParent": "true",
+        "open": "true"
+    },
+    {
+        "id": 149,
+        "name": "Pancreatic islet",
+        "pId": 135,
+        "open": "true"
+    },
+    {
+        "id": 150,
+        "name": "Colon",
+        "pId": 78,
+        "open": "true"
+    },
+    {
+        "id": 151,
+        "name": "Connective tissue",
+        "isParent": "true",
+        "open": "true"
+    }
+];
+    
+
+          
+    $(document).ready(function(){
+      zTreeObj = $.fn.zTree.init($("#treeDemo"), setting, zNodes);
+      });
+    
+    ZTreeObj.expandAll(true);
+
+
+    let treeObj = $.fn.zTree.init($("#tree"), setting, departments);
+    
+    treeObj.expandAll(true);    //默认展开
+    var nodes = treeObj.getNodes();  
+    
+    if (nodes.length > 0) {
+      var node = treeObj.selectNode(nodes[0]);//默认选中根节点
+    }
+
+
+
+  
+      
+    </SCRIPT>
+  </HEAD>
+
+<BODY>
+  <div>
+    <ul id="treeDemo" class="ztree"></ul>
+
+  </div>
+
+</BODY>
+
+</HTML>
